@@ -4,10 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>LCode.NETCore.Base.5.0</RootNamespace>
     <Authors>Diego Gabriel León Peña</Authors>
-    <Product>LCode.NETCore.Base</Product>
+    <Product>LCode.NETCore.Base.5.0</Product>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <Description>Paquete de servicios y herramientas para .Net Core</Description>
     <Company>LCode</Company>
+    <RepositoryUrl>https://github.com/diegabo1996/LCode.NETCore.Base</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/diegabo1996/LCode.NETCore.Base</PackageProjectUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageId>LCode.NETCore.Base</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
