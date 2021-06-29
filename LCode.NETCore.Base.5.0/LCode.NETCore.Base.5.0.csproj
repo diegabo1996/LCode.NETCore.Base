@@ -12,6 +12,8 @@
     <PackageProjectUrl>https://github.com/diegabo1996/LCode.NETCore.Base</PackageProjectUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageId>LCode.NETCore.Base</PackageId>
+    <Copyright>LCode © 2021</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
