@@ -8,9 +8,9 @@ using LCode.NETCore.Base._5._0.Entidades;
 
 namespace LCode.NETCore.Base._5._0.Configuracion
 {
-    public class BaseConfiguracion
+    public static class BaseConfiguracion
     {
-        public string ObtenerValor(string ValorObtn)
+        public static string ObtenerValor(string ValorObtn)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -24,7 +24,7 @@ namespace LCode.NETCore.Base._5._0.Configuracion
             string Valor = configuration[ValorObtn];
             return Valor;
         }
-        public string ObtenerMQ(string ValorObtn)
+        public static string ObtenerMQ(string ValorObtn)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -38,7 +38,7 @@ namespace LCode.NETCore.Base._5._0.Configuracion
             string Valor = configuration[ValorObtn];
             return Valor;
         }
-        public string ObtenerValorDB(string ValorObtn)
+        public static string ObtenerValorDB(string ValorObtn)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -52,7 +52,7 @@ namespace LCode.NETCore.Base._5._0.Configuracion
             string Valor = configuration[ValorObtn];
             return Valor;
         }
-        public string ObtenerValorBase(string ValorObtn)
+        public static string ObtenerValorBase(string ValorObtn)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -66,7 +66,20 @@ namespace LCode.NETCore.Base._5._0.Configuracion
             string Valor = configuration[ValorObtn];
             return Valor;
         }
-        public string ObtenerSeccion(string Seccion)
+        public static IConfigurationSection ObtenerSeccionBase(string ValorObtn)
+        {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.base.json")
+            .Build();
+            //var configurationBuilder = new ConfigurationBuilder();
+            //var path = Path.Combine(Directory.GetCurrentDirectory(), "appsettings.json");
+            //configurationBuilder.AddJsonFile(path, false);
+            //var root = configurationBuilder.Build();
+            //var appSetting = root.GetValue("ConexionBDBASE");
+            return configuration.GetSection(ValorObtn);
+        }
+        public static string ObtenerSeccion(string Seccion)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -80,7 +93,7 @@ namespace LCode.NETCore.Base._5._0.Configuracion
             string Valor = JsonConvert.SerializeObject(configuration.GetSection(Seccion));
             return Valor;
         }
-        public ConexionBD ObtenerBD(string NombreConexion)
+        public static ConexionBD ObtenerBD(string NombreConexion)
         {
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)

@@ -20,8 +20,7 @@ namespace LCode.NETCore.Base._5._0.Logs
                     Excepcion = ((Exception)Excepcion_Mensaje);
                     Excepcion_Mensaje = null;
                 }
-                BaseConfiguracion Config = new BaseConfiguracion();
-                string UnidadLogs = Config.ObtenerValorBase("UnidadLogs");
+                string UnidadLogs = BaseConfiguracion.ObtenerValorBase("UnidadLogs");
                 string RutaFinal = UnidadLogs + ":\\LogsAplicativos\\" + Assembly.GetEntryAssembly().GetName().Name;
                 if (!Directory.Exists(RutaFinal))
                 {
@@ -92,8 +91,7 @@ Environment.NewLine + "Mensaje: " + InterpretaObjetos(Excepcion_Mensaje);
                     Excepcion = ((Exception)Excepcion_Mensaje);
                     Excepcion_Mensaje = null;
                 }
-                BaseConfiguracion Config = new BaseConfiguracion();
-                string UnidadLogs = Config.ObtenerValorBase("UnidadLogs");
+                string UnidadLogs = BaseConfiguracion.ObtenerValorBase("UnidadLogs");
                 string RutaFinal = UnidadLogs + ":\\LogsAplicativos\\" + Assembly.GetEntryAssembly().GetName().Name;
                 if (!Directory.Exists(RutaFinal))
                 {
@@ -147,8 +145,7 @@ Environment.NewLine + "Mensaje: " + InterpretaObjetos(Excepcion_Mensaje);
         {
             try
             {
-                BaseConfiguracion Config = new BaseConfiguracion();
-                string UnidadLogs = Config.ObtenerValorBase("UnidadLogs");
+                string UnidadLogs = BaseConfiguracion.ObtenerValorBase("UnidadLogs");
                 string RutaFinal = UnidadLogs + ":\\LogsAplicativos\\" + Assembly.GetEntryAssembly().GetName().Name;
                 if (!Directory.Exists(RutaFinal))
                 {
@@ -219,8 +216,7 @@ Environment.NewLine + "Mensaje: " + InterpretaObjetos(Excepcion_Mensaje);
         {
             try
             {
-                BaseConfiguracion Config = new BaseConfiguracion();
-                string UnidadLogs = Config.ObtenerValorBase("UnidadLogs");
+                string UnidadLogs = BaseConfiguracion.ObtenerValorBase("UnidadLogs");
                 string RutaFinal = UnidadLogs + ":\\LogsAplicativos\\" + Assembly.GetEntryAssembly().GetName().Name + "\\EventosSimples";
                 if (!Directory.Exists(RutaFinal))
                 {

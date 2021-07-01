@@ -16,8 +16,7 @@ namespace LCode.NETCore.Base._5._0.BaseDatos
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             RegistroLogs Logs = new RegistroLogs();
-            BaseConfiguracion Config = new BaseConfiguracion();
-            LCode.NETCore.Base._5._0.Entidades.ConexionBD ConexionFinal = Config.ObtenerBD(NombreConexion);
+            LCode.NETCore.Base._5._0.Entidades.ConexionBD ConexionFinal = BaseConfiguracion.ObtenerBD(NombreConexion);
             var Conexion = new SqlConnectionStringBuilder
             {
                 DataSource = ConexionFinal.Servidor,

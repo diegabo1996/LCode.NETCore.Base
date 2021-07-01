@@ -2,6 +2,7 @@
 using LCode.NETCore.Base._5._0.Logs;
 using System;
 using System.ServiceProcess;
+using TipoEvento = LCode.NETCore.Base._5._0.Logs.TipoEvento;
 
 namespace LCode.NETCore.Base._5._0.WindowsServices
 {

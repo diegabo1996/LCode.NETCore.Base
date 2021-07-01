@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace LCode.NETCore.Base._5._0.Entidades
 {
-    public class DatosServicio
+    public static class DatosServicio
     {
-        public string NombreServicio { get { return Assembly.GetEntryAssembly().GetName().Name; } }
-        public string NombreServicioCompleto { get { return Assembly.GetEntryAssembly().GetName().FullName; } }
-        public string CodigoBase { get { return Assembly.GetEntryAssembly().GetName().CodeBase; } }
-        public string Version { get { return Assembly.GetEntryAssembly().GetName().Version.ToString(); } }
-        public bool EsDocker { get { return Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"; } }
+        public static string NombreServicio { get { return Assembly.GetEntryAssembly().GetName().Name; } }
+        public static string NombreServicioCompleto { get { return Assembly.GetEntryAssembly().GetName().FullName; } }
+        public static string CodigoBase { get { return Assembly.GetEntryAssembly().GetName().CodeBase; } }
+        public static string Version { get { return Assembly.GetEntryAssembly().GetName().Version.ToString(); } }
+        public static bool EsDocker { get { return Environment.GetEnvironmentVariable("DOTNET_RUNNING_IN_CONTAINER") == "true"; } }
     }
 }

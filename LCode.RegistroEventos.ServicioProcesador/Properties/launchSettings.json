@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "LCode.RegistroEventos.ServicioProcesador": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      },
+      "dotnetRunMessages": "true"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

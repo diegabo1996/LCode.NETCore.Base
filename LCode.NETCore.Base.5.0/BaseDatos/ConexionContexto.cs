@@ -13,11 +13,10 @@ namespace LCode.NETCore.Base._5._0.BaseDatos
         public string NombreConexion;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            BaseConfiguracion Config = new BaseConfiguracion();
-            string Servidor = Config.ObtenerValorDB("Conexion"+ NombreConexion + ":BDServidor");
-            string BaseDatos = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDNombre");
-            string Usuario = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDUsuario");
-            string Contrasena = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDContrasena");
+            string Servidor = BaseConfiguracion.ObtenerValorDB("Conexion"+ NombreConexion + ":BDServidor");
+            string BaseDatos = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDNombre");
+            string Usuario = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDUsuario");
+            string Contrasena = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDContrasena");
             var Conexion = new SqlConnectionStringBuilder
             {
                 DataSource = Servidor,
@@ -38,11 +37,10 @@ namespace LCode.NETCore.Base._5._0.BaseDatos
         public string NombreConexion="CSH";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            BaseConfiguracion Config = new BaseConfiguracion();
-            string Servidor = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDServidor");
-            string BaseDatos = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDNombre");
-            string Usuario = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDUsuario");
-            string Contrasena = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDContrasena");
+            string Servidor = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDServidor");
+            string BaseDatos = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDNombre");
+            string Usuario = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDUsuario");
+            string Contrasena = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDContrasena");
             var Conexion = new SqlConnectionStringBuilder
             {
                 DataSource = Servidor,
@@ -58,11 +56,10 @@ namespace LCode.NETCore.Base._5._0.BaseDatos
         public string NombreConexion = "BOL";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            BaseConfiguracion Config = new BaseConfiguracion();
-            string Servidor = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDServidor");
-            string BaseDatos = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDNombre");
-            string Usuario = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDUsuario");
-            string Contrasena = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDContrasena");
+            string Servidor = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDServidor");
+            string BaseDatos = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDNombre");
+            string Usuario = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDUsuario");
+            string Contrasena = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDContrasena");
             var Conexion = new SqlConnectionStringBuilder
             {
                 DataSource = Servidor,
@@ -78,11 +75,10 @@ namespace LCode.NETCore.Base._5._0.BaseDatos
         public string NombreConexion = "OTP";
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            BaseConfiguracion Config = new BaseConfiguracion();
-            string Servidor = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDServidor");
-            string BaseDatos = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDNombre");
-            string Usuario = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDUsuario");
-            string Contrasena = Config.ObtenerValorDB("Conexion" + NombreConexion + ":BDContrasena");
+            string Servidor = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDServidor");
+            string BaseDatos = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDNombre");
+            string Usuario = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDUsuario");
+            string Contrasena = BaseConfiguracion.ObtenerValorDB("Conexion" + NombreConexion + ":BDContrasena");
             var Conexion = new SqlConnectionStringBuilder
             {
                 DataSource = Servidor,
@@ -103,7 +99,6 @@ namespace LCode.NETCore.Base._5._0.BaseDatos
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            BaseConfiguracion Config = new BaseConfiguracion();
             string Servidor = ConexionParametrica.Servidor;
             string BaseDatos = ConexionParametrica.BaseDatos;
             string Usuario = ConexionParametrica.Usuario;

@@ -1,0 +1,246 @@
+
+-------------------------------------------------------------------------------------------------------------------------
+1/7/2021 15:56:22
+Log-TipoEvento::: Datos - Nombre Proyecto: LCode.RegistroEventos.WebHook
+Version: 1.0.0.0
+Id Seguimiento: 5f094201d9ebdb4591d16465fcbec935||00-5f094201d9ebdb4591d16465fcbec935-9f9e354dcfa4c94c-00
+Nombre Archivo: LCode.RegistroEventos.WebHook, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Nombre de Clase: <PostAsync>d__2
+Nombre Metodo: MoveNext
+Numero Linea: 34
+Numero Columna: 21
+Mensaje: Broker unreachable: usr1@localhost:5672/
+Mensaje Detallado: MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: usr1@localhost:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> RabbitMQ.Client.Exceptions.AuthenticationFailureException: ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN. For details see the broker logfile.
+   at RabbitMQ.Client.Framing.Impl.Connection.StartAndTune()
+   at RabbitMQ.Client.Framing.Impl.Connection.Open(Boolean insist)
+   at RabbitMQ.Client.Framing.Impl.Connection..ctor(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.Framing.Impl.ProtocolBase.CreateConnection(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateSharedConnection(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ScopeModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Transports.HostConfigurationRetryExtensions.Retry(IHostConfiguration hostConfiguration, Func`1 factory, ISupervisor supervisor)
+   at LCode.RegistroEventos.WebHook.Controllers.RegistrarNuevoEvento.PostAsync(NuevoEvento value) in E:\Soluciones\LCode.NETCore.Base\LCode.RegistroEventos.WebHook\Controllers\RegistrarNuevoEvento.cs:line 34
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------
+1/7/2021 15:57:42
+Log-TipoEvento::: Datos - Nombre Proyecto: LCode.RegistroEventos.WebHook
+Version: 1.0.0.0
+Id Seguimiento: 20833c91d7722c48bbb90f8fc0dfd6d7||00-20833c91d7722c48bbb90f8fc0dfd6d7-50cb95eb79a05248-00
+Nombre Archivo: LCode.RegistroEventos.WebHook, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Nombre de Clase: <PostAsync>d__2
+Nombre Metodo: MoveNext
+Numero Linea: 34
+Numero Columna: 21
+Mensaje: Broker unreachable: usr1@192.168.0.108:5672/
+Mensaje Detallado: MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: usr1@192.168.0.108:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> RabbitMQ.Client.Exceptions.AuthenticationFailureException: ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN. For details see the broker logfile.
+   at RabbitMQ.Client.Framing.Impl.Connection.StartAndTune()
+   at RabbitMQ.Client.Framing.Impl.Connection.Open(Boolean insist)
+   at RabbitMQ.Client.Framing.Impl.Connection..ctor(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.Framing.Impl.ProtocolBase.CreateConnection(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateSharedConnection(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ScopeModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Transports.HostConfigurationRetryExtensions.Retry(IHostConfiguration hostConfiguration, Func`1 factory, ISupervisor supervisor)
+   at LCode.RegistroEventos.WebHook.Controllers.RegistrarNuevoEvento.PostAsync(NuevoEvento value) in E:\Soluciones\LCode.NETCore.Base\LCode.RegistroEventos.WebHook\Controllers\RegistrarNuevoEvento.cs:line 34
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------
+1/7/2021 16:01:02
+Log-TipoEvento::: Datos - Nombre Proyecto: LCode.RegistroEventos.WebHook
+Version: 1.0.0.0
+Id Seguimiento: 594b300ec76b884e9a34312c3ffd5c9d||00-594b300ec76b884e9a34312c3ffd5c9d-0c5ce1d82c99b242-00
+Nombre Archivo: LCode.RegistroEventos.WebHook, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Nombre de Clase: <PostAsync>d__2
+Nombre Metodo: MoveNext
+Numero Linea: 34
+Numero Columna: 21
+Mensaje: Broker unreachable: usr1@192.168.0.108:5672/
+Mensaje Detallado: MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: usr1@192.168.0.108:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> RabbitMQ.Client.Exceptions.AuthenticationFailureException: ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN. For details see the broker logfile.
+   at RabbitMQ.Client.Framing.Impl.Connection.StartAndTune()
+   at RabbitMQ.Client.Framing.Impl.Connection.Open(Boolean insist)
+   at RabbitMQ.Client.Framing.Impl.Connection..ctor(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.Framing.Impl.ProtocolBase.CreateConnection(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateSharedConnection(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ScopeModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Transports.HostConfigurationRetryExtensions.Retry(IHostConfiguration hostConfiguration, Func`1 factory, ISupervisor supervisor)
+   at LCode.RegistroEventos.WebHook.Controllers.RegistrarNuevoEvento.PostAsync(NuevoEvento value) in E:\Soluciones\LCode.NETCore.Base\LCode.RegistroEventos.WebHook\Controllers\RegistrarNuevoEvento.cs:line 34
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------
+1/7/2021 16:03:28
+Log-TipoEvento::: Datos - Nombre Proyecto: LCode.RegistroEventos.WebHook
+Version: 1.0.0.0
+Id Seguimiento: 5356305a594f6b408e94ea5077e196ff||00-5356305a594f6b408e94ea5077e196ff-94e40fe0497c3942-00
+Nombre Archivo: LCode.RegistroEventos.WebHook, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Nombre de Clase: <PostAsync>d__2
+Nombre Metodo: MoveNext
+Numero Linea: 34
+Numero Columna: 21
+Mensaje: Broker unreachable: usr1@192.168.0.108:5672/
+Mensaje Detallado: MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: usr1@192.168.0.108:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> RabbitMQ.Client.Exceptions.AuthenticationFailureException: ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN. For details see the broker logfile.
+   at RabbitMQ.Client.Framing.Impl.Connection.StartAndTune()
+   at RabbitMQ.Client.Framing.Impl.Connection.Open(Boolean insist)
+   at RabbitMQ.Client.Framing.Impl.Connection..ctor(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.Framing.Impl.ProtocolBase.CreateConnection(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateSharedConnection(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ScopeModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Transports.HostConfigurationRetryExtensions.Retry(IHostConfiguration hostConfiguration, Func`1 factory, ISupervisor supervisor)
+   at LCode.RegistroEventos.WebHook.Controllers.RegistrarNuevoEvento.PostAsync(NuevoEvento value) in E:\Soluciones\LCode.NETCore.Base\LCode.RegistroEventos.WebHook\Controllers\RegistrarNuevoEvento.cs:line 34
+-------------------------------------------------------------------------------------------------------------------------
+
+-------------------------------------------------------------------------------------------------------------------------
+1/7/2021 16:34:19
+Log-TipoEvento::: Datos - Nombre Proyecto: LCode.RegistroEventos.WebHook
+Version: 1.0.0.0
+Id Seguimiento: 768bc759c5e92b4bbd2d20b5e3a3f333||00-768bc759c5e92b4bbd2d20b5e3a3f333-22461fc02a888b4d-00
+Nombre Archivo: LCode.RegistroEventos.WebHook, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+Nombre de Clase: <PostAsync>d__2
+Nombre Metodo: MoveNext
+Numero Linea: 34
+Numero Columna: 21
+Mensaje: Broker unreachable: guest@btblpd01:5672/
+Mensaje Detallado: MassTransit.RabbitMqTransport.RabbitMqConnectionException: Broker unreachable: guest@btblpd01:5672/
+ ---> RabbitMQ.Client.Exceptions.BrokerUnreachableException: None of the specified endpoints were reachable
+ ---> RabbitMQ.Client.Exceptions.AuthenticationFailureException: ACCESS_REFUSED - Login was refused using authentication mechanism PLAIN. For details see the broker logfile.
+   at RabbitMQ.Client.Framing.Impl.Connection.StartAndTune()
+   at RabbitMQ.Client.Framing.Impl.Connection.Open(Boolean insist)
+   at RabbitMQ.Client.Framing.Impl.Connection..ctor(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.Framing.Impl.ProtocolBase.CreateConnection(IConnectionFactory factory, Boolean insist, IFrameHandler frameHandler, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   --- End of inner exception stack trace ---
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IEndpointResolver endpointResolver, String clientProvidedName)
+   at RabbitMQ.Client.ConnectionFactory.CreateConnection(IList`1 hostnames, String clientProvidedName)
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   --- End of inner exception stack trace ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateConnection(ISupervisor supervisor)
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ConnectionContextFactory.CreateSharedConnection(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.Internals.Extensions.SupervisorExtensions.CreateAgent[T,TAgent](ISupervisor`1 supervisor, IAsyncPipeContextAgent`1 asyncContext, Func`3 agentFactory, CancellationToken cancellationToken)
+   at GreenPipes.Internals.Extensions.TaskExtensions.<>c__DisplayClass5_0`1.<<OrCanceled>g__WaitAsync|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Internals.Extensions.SupervisorExtensions.<>c__DisplayClass0_0`2.<<CreateAgent>g__HandleSupervisorTask|0>d.MoveNext()
+--- End of stack trace from previous location ---
+   at MassTransit.RabbitMqTransport.Integration.ScopeModelContextFactory.CreateSharedModel(Task`1 context, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at GreenPipes.Agents.PipeContextSupervisor`1.GreenPipes.IPipeContextSource<TContext>.Send(IPipe`1 pipe, CancellationToken cancellationToken)
+   at MassTransit.Transports.HostConfigurationRetryExtensions.Retry(IHostConfiguration hostConfiguration, Func`1 factory, ISupervisor supervisor)
+   at LCode.RegistroEventos.WebHook.Controllers.RegistrarNuevoEvento.PostAsync(NuevoEvento value) in E:\Soluciones\LCode.NETCore.Base\LCode.RegistroEventos.WebHook\Controllers\RegistrarNuevoEvento.cs:line 34
+-------------------------------------------------------------------------------------------------------------------------

@@ -7,13 +7,12 @@ using System.Net.Mail;
 public class EnvioMailsGn
 {
     RegistroLogs Logs = new RegistroLogs();
-    BaseConfiguracion BConf = new BaseConfiguracion();
     private Attachment[] Adjuntos = new Attachment[0];
     public bool EnviarMail(string[] Destino, string[] Copia, string Asunto, string Mensaje)
     {
         MailMessage mail = new MailMessage();
-        SmtpClient SmtpServer = new SmtpClient(BConf.ObtenerValor("ParametrosCorreo:ServidorCorreo"));
-        mail.From = new MailAddress(BConf.ObtenerValor("ParametrosCorreo:CorreoEmisor"), BConf.ObtenerValor("ParametrosCorreo:NombreRemitente"));
+        SmtpClient SmtpServer = new SmtpClient(BaseConfiguracion.ObtenerValor("ParametrosCorreo:ServidorCorreo"));
+        mail.From = new MailAddress(BaseConfiguracion.ObtenerValor("ParametrosCorreo:CorreoEmisor"), BaseConfiguracion.ObtenerValor("ParametrosCorreo:NombreRemitente"));
         bool Resultado;
         try
         {
