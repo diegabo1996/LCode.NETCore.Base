@@ -25,7 +25,10 @@ namespace LCode.NETCore.Base._5._0.Logs
             eventoEntidad.NombreComponente = DatosServicio.NombreServicio;
             eventoEntidad.NombreComponenteCompleto = DatosServicio.NombreServicioCompleto;
             eventoEntidad.Version = DatosServicio.Version;
-            eventoEntidad.IdActividad = Activity.Current.RootId+"||"+ Activity.Current.Id;
+            if (Activity.Current != null)
+            {
+                eventoEntidad.IdActividad = Activity.Current.RootId + "||" + Activity.Current.Id;
+            }
             eventoEntidad.FechaHoraEvento = DateTime.Now;
             #endregion
             if (Excepcion_Mensaje.GetType().Name.ToUpper().Contains("EXCEPTION"))
@@ -76,7 +79,7 @@ namespace LCode.NETCore.Base._5._0.Logs
                     await EventosLocales.Registrar(eventoEntidad);
                 }
             }
-            catch(Exception Ex)
+            catch (Exception Ex)
             {
                 await EventosLocales.Registrar(Ex);
             }

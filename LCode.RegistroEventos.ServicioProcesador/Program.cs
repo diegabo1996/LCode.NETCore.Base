@@ -20,6 +20,7 @@ namespace LCode.RegistroEventos.ServicioProcesador
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+            .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
                     string ServidorMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Servidor");
