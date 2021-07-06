@@ -27,6 +27,11 @@ namespace LCode.RegistroEventos.WebHook.Controllers
             {
                 if (value != null)
                 {
+                    var IP=Request.HttpContext.Connection.RemoteIpAddress;
+                    if (IP!=null)
+                    {
+                        value.IPOrigen = IP.ToString();
+                    }
                     string ServidorMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Servidor");
                     string MQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Cola");
                     Uri uri = new Uri("rabbitmq://" + ServidorMQ + "/" + MQ + "");

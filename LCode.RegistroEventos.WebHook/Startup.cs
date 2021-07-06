@@ -54,12 +54,9 @@ namespace LCode.RegistroEventos.WebHook
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LCode.RegistroEventos.WebHook v1"));
-            }
             app.Use(async (context, next) =>
             {
                 string LlaveServicio = context.Request.Headers.FirstOrDefault(x => x.Key == "LlaveServicio").Value.FirstOrDefault();

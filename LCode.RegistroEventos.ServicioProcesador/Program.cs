@@ -27,12 +27,13 @@ namespace LCode.RegistroEventos.ServicioProcesador
                     string MQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Cola");
                     string UsuarioMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Usuario");
                     string ContraseniaMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Contrasenia");
+                    var URLMQ = new Uri("rabbitmq://" + ServidorMQ);
                     services.AddMassTransit(x =>
                     {
                         x.AddConsumer<RegistroEventosConsumidor>();
                         x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
                         {
-                            cfg.Host(new Uri("rabbitmq://" + ServidorMQ), h =>
+                            cfg.Host(URLMQ, h =>
                             {
                                 h.Username(UsuarioMQ);
                                 h.Password(ContraseniaMQ);

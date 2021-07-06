@@ -13,5 +13,7 @@ namespace LCode.RegistroEventos.BD.Modelos
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int IdRegistroEvento { get; set; }
+        [Column(TypeName = "varchar(25)")]
+        public string? IPOrigen { get; set; }
     }
 }
