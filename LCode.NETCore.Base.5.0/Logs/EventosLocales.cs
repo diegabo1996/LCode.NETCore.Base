@@ -79,8 +79,15 @@ Environment.NewLine + @"Mensaje: " + Evento.InterpretaObjetos(Excepcion_Mensaje)
             try
             {
                 LogsE Lc = new LogsE();
-                BaseConfiguracion.ObtenerSeccionBase("Logs").Bind(Lc);
                 string RutaFinal = System.AppDomain.CurrentDomain.BaseDirectory + "LocalLogs";
+                try
+                { 
+                    BaseConfiguracion.ObtenerSeccionBase("Logs").Bind(Lc);
+                }
+                catch
+                {
+                    RutaFinal = System.AppDomain.CurrentDomain.BaseDirectory + "LocalLogs";
+                }
                 if (Lc != null && Lc.GuardarEnArchivo && Lc.ConfiguracionArchivo != null && !string.IsNullOrEmpty(Lc.ConfiguracionArchivo.RutaGuardado))
                 {
                     RutaFinal = Lc.ConfiguracionArchivo.RutaGuardado + "\\LogsAplicativos\\" + Assembly.GetEntryAssembly().GetName().Name;

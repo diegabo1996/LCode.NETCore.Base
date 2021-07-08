@@ -59,12 +59,12 @@ namespace LCode.RegistroEventos.WebHook
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LCode.RegistroEventos.WebHook v1"));
             app.Use(async (context, next) =>
             {
-                string LlaveServicio = context.Request.Headers.FirstOrDefault(x => x.Key == "LlaveServicio").Value.FirstOrDefault();
-                if (string.IsNullOrEmpty(Seguridad.T3DES.DecryptKeyTripleDes(LlaveServicio)))
-                {
-                    context.Response.StatusCode = 401;
-                    return;
-                }
+                //string LlaveServicio = context.Request.Headers.FirstOrDefault(x => x.Key == "LlaveServicio").Value.FirstOrDefault();
+                //if (string.IsNullOrEmpty(Seguridad.T3DES.DecryptKeyTripleDes(LlaveServicio)))
+                //{
+                //    context.Response.StatusCode = 401;
+                //    return;
+                //}
                 await next();
             });
             app.UseHttpsRedirection();

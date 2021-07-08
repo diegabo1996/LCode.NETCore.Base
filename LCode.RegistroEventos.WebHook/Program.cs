@@ -1,3 +1,4 @@
+using LCode.NETCore.Base._5._0.Excepciones;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +14,7 @@ namespace LCode.RegistroEventos.WebHook
     {
         public static void Main(string[] args)
         {
+            MiddlewareExcepciones.IniciarCapturaExcepciones();
             CreateHostBuilder(args).Build().Run();
         }
 

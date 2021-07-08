@@ -27,6 +27,7 @@ namespace LCode.RegistroEventos.WebHook.Controllers
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
+            throw new Exception("Excepcion!");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),

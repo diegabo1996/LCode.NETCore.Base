@@ -49,6 +49,7 @@ namespace LCode.NETCore.Base._5._0.Entidades
     public enum TipoEvento
     {
         Error,
+        Error_No_Controlado,
         Advertencia,
         Informativo
     }

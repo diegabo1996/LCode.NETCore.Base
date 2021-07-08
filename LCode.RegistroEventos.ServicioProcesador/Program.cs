@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LCode.RegistroEventos.ServicioProcesador.ConsumidoresMQ;
+using LCode.NETCore.Base._5._0.Excepciones;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace LCode.RegistroEventos.ServicioProcesador
 {
@@ -15,6 +17,7 @@ namespace LCode.RegistroEventos.ServicioProcesador
     {
         public static void Main(string[] args)
         {
+            MiddlewareExcepciones.IniciarCapturaExcepciones();
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -23,6 +26,7 @@ namespace LCode.RegistroEventos.ServicioProcesador
             .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddHostedService<Worker>();
                     string ServidorMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Servidor");
                     string MQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Cola");
                     string UsuarioMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Usuario");

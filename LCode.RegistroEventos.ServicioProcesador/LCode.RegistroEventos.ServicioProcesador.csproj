@@ -19,4 +19,10 @@
     <ProjectReference Include="..\LCode.NETCore.Base.5.0\LCode.NETCore.Base.5.0.csproj" />
     <ProjectReference Include="..\LCode.RegistroEventos.BD\LCode.RegistroEventos.BD.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.base.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

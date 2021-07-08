@@ -20,7 +20,7 @@ namespace LCode.RegistroEventos.ServicioProcesador.ConsumidoresMQ
             }
             catch (Exception Ex)
             {
-                await Evento.Registrar( NETCore.Base._5._0.Entidades.TipoEvento.Error,Ex);
+                await Evento.ErrorAsync(Ex);
             }
         }
     }
