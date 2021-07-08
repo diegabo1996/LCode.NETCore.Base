@@ -83,6 +83,7 @@ namespace LCode.NETCore.Base._5._0.Logs
                 var ttt = sf.GetFileLineNumber();
                 if (ttt != 0)
                 {
+                    sf.
                     eventoEntidad.NombreClase = sf.GetMethod().DeclaringType.Name;
                     eventoEntidad.NombreMetodo = sf.GetMethod().Name;
                     eventoEntidad.NumeroLinea = ttt;
