@@ -23,6 +23,7 @@ namespace LCode.NETCore.Base._5._0.Entidades
         [Column(TypeName = "varchar(500)")]
         [DisplayName("Nombre Completo Componente")]
         public string NombreComponenteCompleto { get; set; }
+        public List<EventoOrigen> ListaOrigen { get; set; }
         [Required]
         [Column(TypeName = "datetime")]
         [DisplayName("Fecha y Hora Registro Componente")]
@@ -44,6 +45,10 @@ namespace LCode.NETCore.Base._5._0.Entidades
         [Required]
         [DisplayName("Docker")]
         public bool EsDocker { get; set; }
+        [Column(TypeName = "varchar(150)")]
+        [DisplayName("Identificador Actividad")]
+        public string? IdActividad { get; set; }
+        public List<EventoEntidad> ListaEventos { get; set; }
         [Required]
         [Column(TypeName = "datetime")]
         [DisplayName("Fecha y Hora Registro Origen")]
@@ -58,20 +63,6 @@ namespace LCode.NETCore.Base._5._0.Entidades
         [DisplayName("Tipo de Evento")]
         public TipoEvento TipoEvento { get; set; }
         [Required]
-        [Column(TypeName = "varchar(150)")]
-        [DisplayName("Identificador Actividad")]
-        public string IdActividad { get; set; }
-        [Required]
-        [Column(TypeName = "varchar(50)")]
-        [DisplayName("Nombre de Clase")]
-        public string NombreClase { get; set; }
-        [Required]
-        [Column(TypeName = "varchar(50)")]
-        [DisplayName("Nombre de Método")]
-        public string NombreMetodo { get; set; }
-        public int NumeroLinea { get; set; }
-        public int NumeroColumna { get; set; }
-        [Required]
         [Column(TypeName = "text")]
         public string Mensaje { get; set; }
         [Column(TypeName = "text")]
@@ -80,16 +71,40 @@ namespace LCode.NETCore.Base._5._0.Entidades
         [Column(TypeName = "text")]
         [DisplayName("Mensaje Adicional")]
         public string? MensajeAdicional { get; set; }
+        public List<RastroEntidad> ListaRastros { get; set; }
         [Required]
         [Column(TypeName = "datetime")]
         [DisplayName("Fecha Hora Registro Evento")]
         public DateTime FechaHoraEvento { get; set; }
+    }
+    public class RastroEntidad
+    {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int IdRastro { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(50)")]
+        [DisplayName("Nombre de Clase")]
+        public string NombreClase { get; set; }
+        [Required]
+        [Column(TypeName = "varchar(50)")]
+        [DisplayName("Nombre de Método")]
+        public string NombreMetodo { get; set; }
+        [DisplayName("Número de Línea")]
+        public int NumeroLinea { get; set; }
+        [DisplayName("Número de Columna")]
+        public int NumeroColumna { get; set; }
+        [Required]
+        [Column(TypeName = "datetime")]
+        [DisplayName("Fecha Hora Registro Evento")]
+        public DateTime FechaHoraRastro { get; set; }
     }
     public enum TipoEvento
     {
         Error,
         Error_No_Controlado,
         Advertencia,
-        Informativo
+        Informativo,
+        Debug
     }
 }
