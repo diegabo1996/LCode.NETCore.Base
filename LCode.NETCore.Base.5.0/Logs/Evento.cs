@@ -15,6 +15,7 @@ namespace LCode.NETCore.Base._5._0.Logs
 {
     public class Evento
     {
+        #region MetodosRegistroEventos
         public static async Task ErrorAsync (object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
             await RegistrarAsync(Entidades.TipoEvento.Error, Excepcion_Mensaje, NotaMensajeExtra);
@@ -25,19 +26,33 @@ namespace LCode.NETCore.Base._5._0.Logs
         }
         public static async Task InformativoAsync(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
-            await RegistrarAsync(Entidades.TipoEvento.Informativo, Excepcion_Mensaje, NotaMensajeExtra);
+            if (NivelLogs() == 1 || NivelLogs() == 2 || NivelLogs() == 3)
+                await RegistrarAsync(Entidades.TipoEvento.Informativo, Excepcion_Mensaje, NotaMensajeExtra);
         }
         public static void Informativo(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
-            Task.Run(async () => await RegistrarAsync(Entidades.TipoEvento.Informativo, Excepcion_Mensaje, NotaMensajeExtra));
+            if (NivelLogs() == 1 || NivelLogs() == 2 || NivelLogs() == 3)
+                Task.Run(async () => await RegistrarAsync(Entidades.TipoEvento.Informativo, Excepcion_Mensaje, NotaMensajeExtra));
         }
         public static async Task AdvertenciaAsync (object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
-            await RegistrarAsync(Entidades.TipoEvento.Advertencia, Excepcion_Mensaje, NotaMensajeExtra);
+            if (NivelLogs() == 1|| NivelLogs() == 2)
+                await RegistrarAsync(Entidades.TipoEvento.Advertencia, Excepcion_Mensaje, NotaMensajeExtra);
         }
         public static void Advertencia(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
-            Task.Run(async () => await RegistrarAsync(Entidades.TipoEvento.Advertencia, Excepcion_Mensaje, NotaMensajeExtra));
+            if (NivelLogs() == 1 || NivelLogs() == 2)
+                Task.Run(async () => await RegistrarAsync(Entidades.TipoEvento.Advertencia, Excepcion_Mensaje, NotaMensajeExtra));
+        }
+        public static void Depuracion(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
+        {
+            if (NivelLogs() == 1)
+                Task.Run(async () => await RegistrarAsync(Entidades.TipoEvento.Depuracion, Excepcion_Mensaje, NotaMensajeExtra));
+        }
+        public static async Task DepuracionAsync(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
+        {
+            if (NivelLogs() == 1)
+                await RegistrarAsync(Entidades.TipoEvento.Depuracion, Excepcion_Mensaje, NotaMensajeExtra);
         }
         public static async Task ErrorNoControladoAsync(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
@@ -47,22 +62,29 @@ namespace LCode.NETCore.Base._5._0.Logs
         {
             Registrar(Entidades.TipoEvento.Error_No_Controlado, Excepcion_Mensaje, NotaMensajeExtra);
         }
+        #endregion MetodosRegistroEventos
+
+        #region MetodosAuxiliares
         internal static async Task RegistrarAsync(Entidades.TipoEvento TipoEvento, object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
+            AplicativoComponente Aplicativo = new AplicativoComponente();
+            Aplicativo.NombreComponente = DatosServicio.NombreServicio;
+            Aplicativo.NombreComponenteCompleto = DatosServicio.NombreServicioCompleto;
+            Aplicativo.ListaOrigen = new List<EventoOrigen>();
+            #region EventoOrigen
+            EventoOrigen eventoOrigen = new EventoOrigen();
+            eventoOrigen.EsDocker = DatosServicio.EsDocker;
+            if (Activity.Current != null)
+            {
+                eventoOrigen.IdActividad = Activity.Current.RootId + "||" + Activity.Current.Id;
+            }
+            eventoOrigen.Version = DatosServicio.Version;
+            eventoOrigen.NombreHost = Environment.MachineName;
+            eventoOrigen.ListaEventos = new List<EventoEntidad>();
+            #region Evento
             Exception Excepcion = null;
             EventoEntidad eventoEntidad = new EventoEntidad();
             StackTrace st;
-            #region Cabecera
-            eventoEntidad.EsDocker = DatosServicio.EsDocker;
-            eventoEntidad.NombreComponente = DatosServicio.NombreServicio;
-            eventoEntidad.NombreComponenteCompleto = DatosServicio.NombreServicioCompleto;
-            eventoEntidad.Version = DatosServicio.Version;
-            if (Activity.Current != null)
-            {
-                eventoEntidad.IdActividad = Activity.Current.RootId + "||" + Activity.Current.Id;
-            }
-            eventoEntidad.FechaHoraEvento = DateTime.Now;
-            #endregion
             if (Excepcion_Mensaje.GetType().Name.ToUpper().Contains("EXCEPTION"))
             {
                 Excepcion = ((Exception)Excepcion_Mensaje);
@@ -78,36 +100,48 @@ namespace LCode.NETCore.Base._5._0.Logs
             }
             eventoEntidad.MensajeAdicional = InterpretaObjetos(NotaMensajeExtra);
             eventoEntidad.TipoEvento = TipoEvento;
+            eventoEntidad.ListaRastros = new List<RastroEntidad>();
+            #region Rastros
             foreach (StackFrame sf in st.GetFrames())
             {
                 var ttt = sf.GetFileLineNumber();
                 if (ttt != 0)
                 {
-                    sf.
-                    eventoEntidad.NombreClase = sf.GetMethod().DeclaringType.Name;
-                    eventoEntidad.NombreMetodo = sf.GetMethod().Name;
-                    eventoEntidad.NumeroLinea = ttt;
-                    eventoEntidad.NumeroColumna = sf.GetFileColumnNumber();
+                    RastroEntidad rastroEntidad = new RastroEntidad();
+                    rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.Name;
+                    rastroEntidad.NombreMetodo = sf.GetMethod().Name;
+                    rastroEntidad.NumeroLinea = ttt;
+                    rastroEntidad.NumeroColumna = sf.GetFileColumnNumber();
+                    eventoEntidad.ListaRastros.Add(rastroEntidad);
                 }
             }
-            await GuardarRegistroAsync(eventoEntidad);
+            #endregion Rastros
+            eventoOrigen.ListaEventos.Add(eventoEntidad);
+            #endregion Evento
+            Aplicativo.ListaOrigen.Add(eventoOrigen);
+            #endregion EventoOrigen
+            await GuardarRegistroAsync(Aplicativo);
         }
         internal static void Registrar(Entidades.TipoEvento TipoEvento, object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
+            AplicativoComponente Aplicativo = new AplicativoComponente();
+            Aplicativo.NombreComponente = DatosServicio.NombreServicio;
+            Aplicativo.NombreComponenteCompleto = DatosServicio.NombreServicioCompleto;
+            Aplicativo.ListaOrigen = new List<EventoOrigen>();
+            #region EventoOrigen
+            EventoOrigen eventoOrigen = new EventoOrigen();
+            eventoOrigen.EsDocker = DatosServicio.EsDocker;
+            if (Activity.Current != null)
+            {
+                eventoOrigen.IdActividad = Activity.Current.RootId + "||" + Activity.Current.Id;
+            }
+            eventoOrigen.Version = DatosServicio.Version;
+            eventoOrigen.NombreHost = Environment.MachineName;
+            eventoOrigen.ListaEventos = new List<EventoEntidad>();
+            #region Evento
             Exception Excepcion = null;
             EventoEntidad eventoEntidad = new EventoEntidad();
             StackTrace st;
-            #region Cabecera
-            eventoEntidad.EsDocker = DatosServicio.EsDocker;
-            eventoEntidad.NombreComponente = DatosServicio.NombreServicio;
-            eventoEntidad.NombreComponenteCompleto = DatosServicio.NombreServicioCompleto;
-            eventoEntidad.Version = DatosServicio.Version;
-            if (Activity.Current != null)
-            {
-                eventoEntidad.IdActividad = Activity.Current.RootId + "||" + Activity.Current.Id;
-            }
-            eventoEntidad.FechaHoraEvento = DateTime.Now;
-            #endregion
             if (Excepcion_Mensaje.GetType().Name.ToUpper().Contains("EXCEPTION"))
             {
                 Excepcion = ((Exception)Excepcion_Mensaje);
@@ -123,21 +157,30 @@ namespace LCode.NETCore.Base._5._0.Logs
             }
             eventoEntidad.MensajeAdicional = InterpretaObjetos(NotaMensajeExtra);
             eventoEntidad.TipoEvento = TipoEvento;
+            eventoEntidad.ListaRastros = new List<RastroEntidad>();
+            #region Rastros
             foreach (StackFrame sf in st.GetFrames())
             {
                 var ttt = sf.GetFileLineNumber();
                 if (ttt != 0)
                 {
-                    eventoEntidad.NombreClase = sf.GetMethod().DeclaringType.Name;
-                    eventoEntidad.NombreMetodo = sf.GetMethod().Name;
-                    eventoEntidad.NumeroLinea = ttt;
-                    eventoEntidad.NumeroColumna = sf.GetFileColumnNumber();
+                    RastroEntidad rastroEntidad = new RastroEntidad();
+                    rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.Name;
+                    rastroEntidad.NombreMetodo = sf.GetMethod().Name;
+                    rastroEntidad.NumeroLinea = ttt;
+                    rastroEntidad.NumeroColumna = sf.GetFileColumnNumber();
+                    eventoEntidad.ListaRastros.Add(rastroEntidad);
                 }
             }
-            GuardarRegistro(eventoEntidad);
+            #endregion Rastros
+            eventoOrigen.ListaEventos.Add(eventoEntidad);
+            #endregion Evento
+            Aplicativo.ListaOrigen.Add(eventoOrigen);
+            #endregion EventoOrigen
+            GuardarRegistro(Aplicativo);
         }
 
-        private static async Task GuardarRegistroAsync(EventoEntidad eventoEntidad)
+        private static async Task GuardarRegistroAsync(AplicativoComponente eventoEntidad)
         {
             try
             {
@@ -162,7 +205,7 @@ namespace LCode.NETCore.Base._5._0.Logs
                 await EventosLocales.Registrar(Ex);
             }
         }
-        private static void GuardarRegistro(EventoEntidad eventoEntidad)
+        private static void GuardarRegistro(AplicativoComponente eventoEntidad)
         {
             try
             {
@@ -206,6 +249,25 @@ namespace LCode.NETCore.Base._5._0.Logs
                 return "";
             }
         }
+        internal static short NivelLogs()
+        {
+            string NivelStr = BaseConfiguracion.ObtenerValorBase("Logs:Nivel").ToUpper();
+            switch (NivelStr)
+            {
+                case "DEPURACION":
+                    return 1;
+                case "ADVERTENCIA":
+                    return 2;
+                case "INFORMATIVO":
+                    return 3;
+                case "ERROR":
+                    return 4;
+                default:
+                    return 1;
+            }
+        }
+        #endregion MetodosAuxiliares
+
     }
 }
 

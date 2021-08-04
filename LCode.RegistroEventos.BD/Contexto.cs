@@ -1,5 +1,5 @@
 ﻿using LCode.NETCore.Base._5._0.BaseDatos;
-using LCode.RegistroEventos.BD.Modelos;
+using LCode.NETCore.Base._5._0.Entidades;
 using Microsoft.EntityFrameworkCore;
 
 namespace LCode.RegistroEventos.BD
@@ -11,9 +11,10 @@ namespace LCode.RegistroEventos.BD
         {
             Iniciar(NombreConexionContexto);
         }
-
-        public DbSet<NuevoEvento> Eventos { get; set; }
-
+        public DbSet<AplicativoComponente> AplicacionesComponentes { get; set; }
+        public DbSet<EventoOrigen> EventosOrigenes { get; set; }
+        public DbSet<EventoEntidad> Eventos { get; set; }
+        public DbSet<RastroEntidad> RastrosEventos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("lcode");

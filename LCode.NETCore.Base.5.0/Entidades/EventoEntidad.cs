@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace LCode.NETCore.Base._5._0.Entidades
 {
-    public class AplicativosComponentes
+    public class AplicativoComponente
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -27,14 +27,16 @@ namespace LCode.NETCore.Base._5._0.Entidades
         [Required]
         [Column(TypeName = "datetime")]
         [DisplayName("Fecha y Hora Registro Componente")]
-        public DateTime FechaHoraCreacion { get; set; }
+        public DateTime FechaHoraRegistro { get; set; }
     }
     public class EventoOrigen
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DisplayName("Id Origen")]
         public int IdEventoOrigen { get; set; }
         [Column(TypeName = "varchar(25)")]
+        [DisplayName("IP Origen")]
         public string? IPOrigen { get; set; }
         [Column(TypeName = "varchar(25)")]
         [DisplayName("Nombre Host")]
@@ -52,7 +54,7 @@ namespace LCode.NETCore.Base._5._0.Entidades
         [Required]
         [Column(TypeName = "datetime")]
         [DisplayName("Fecha y Hora Registro Origen")]
-        public DateTime FechaHoraCreacion { get; set; }
+        public DateTime FechaHoraRegistro { get; set; }
     }
     public class EventoEntidad
     {
@@ -105,6 +107,6 @@ namespace LCode.NETCore.Base._5._0.Entidades
         Error_No_Controlado,
         Advertencia,
         Informativo,
-        Debug
+        Depuracion
     }
 }

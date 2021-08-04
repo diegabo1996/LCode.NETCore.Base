@@ -49,27 +49,28 @@ Environment.NewLine + @"Mensaje: " + Evento.InterpretaObjetos(Excepcion_Mensaje)
             Mensaje += Environment.NewLine + "-------------------------------------------------------------------------------------------------------------------------";
             await GuardarLocal(Mensaje);
         }
-        internal static async Task Registrar(EventoEntidad eventoEntidad)
+        internal static async Task Registrar(AplicativoComponente eventoEntidad)
         {
             string Mensaje = Environment.NewLine + "-------------------------------------------------------------------------------------------------------------------------" +
             Environment.NewLine + DateTime.Now.ToString() +
             Environment.NewLine + "Log-";
-            Mensaje += nameof(eventoEntidad.TipoEvento).ToString() + "::: Datos - Nombre Proyecto: " + eventoEntidad.NombreComponente +
-            Environment.NewLine + "Version: " + eventoEntidad.Version +
-            Environment.NewLine + "Id Seguimiento: " + eventoEntidad.IdActividad +
+            var TipoEvento = eventoEntidad.ListaOrigen.First().ListaEventos.First().TipoEvento;
+            Mensaje += nameof(TipoEvento).ToString() + "::: Datos - Nombre Proyecto: " + eventoEntidad.NombreComponente +
+            Environment.NewLine + "Version: " + eventoEntidad.ListaOrigen.First().Version +
+            Environment.NewLine + "Id Seguimiento: " + eventoEntidad.ListaOrigen.First().IdActividad +
             Environment.NewLine + "Nombre Archivo: " + eventoEntidad.NombreComponenteCompleto +
-            Environment.NewLine + "Nombre de Clase: " + eventoEntidad.NombreClase +
-            Environment.NewLine + "Nombre Metodo: " + eventoEntidad.NombreMetodo +
-            Environment.NewLine + "Numero Linea: " + eventoEntidad.NumeroLinea +
-            Environment.NewLine + "Numero Columna: " + eventoEntidad.NumeroColumna +
-            Environment.NewLine + "Mensaje: " + eventoEntidad.Mensaje;
-            if (!string.IsNullOrEmpty(eventoEntidad.MensajeDetallado))
+            Environment.NewLine + "Nombre de Clase: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().ListaRastros.First().NombreClase +
+            Environment.NewLine + "Nombre Metodo: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().ListaRastros.First().NombreMetodo +
+            Environment.NewLine + "Numero Linea: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().ListaRastros.First().NumeroLinea +
+            Environment.NewLine + "Numero Columna: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().ListaRastros.First().NumeroColumna +
+            Environment.NewLine + "Mensaje: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().Mensaje;
+            if (!string.IsNullOrEmpty(eventoEntidad.ListaOrigen.First().ListaEventos.First().MensajeDetallado))
             {
-                Mensaje += Environment.NewLine + "Mensaje Detallado: " + eventoEntidad.MensajeDetallado;
+                Mensaje += Environment.NewLine + "Mensaje Detallado: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().MensajeDetallado;
             }
-            if (!string.IsNullOrEmpty(eventoEntidad.MensajeAdicional))
+            if (!string.IsNullOrEmpty(eventoEntidad.ListaOrigen.First().ListaEventos.First().MensajeAdicional))
             {
-                Mensaje += Environment.NewLine + "Mensaje Adicional 2: " + Evento.InterpretaObjetos(eventoEntidad.MensajeAdicional);
+                Mensaje += Environment.NewLine + "Mensaje Adicional 2: " + Evento.InterpretaObjetos(eventoEntidad.ListaOrigen.First().ListaEventos.First().MensajeAdicional);
             }
             Mensaje += Environment.NewLine + "-------------------------------------------------------------------------------------------------------------------------";
             await GuardarLocal(Mensaje);

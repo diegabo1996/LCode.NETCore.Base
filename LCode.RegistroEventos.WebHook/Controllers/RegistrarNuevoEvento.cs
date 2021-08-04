@@ -1,9 +1,10 @@
 ﻿using LCode.NETCore.Base._5._0.Configuracion;
+using LCode.NETCore.Base._5._0.Entidades;
 using LCode.NETCore.Base._5._0.Logs;
-using LCode.RegistroEventos.BD.Modelos;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -21,7 +22,7 @@ namespace LCode.RegistroEventos.WebHook.Controllers
         }
         // POST api/<RegistrarNuevoEvento>
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] NuevoEvento value)
+        public async Task<IActionResult> PostAsync([FromBody] AplicativoComponente value)
         {
             try
             {
@@ -30,20 +31,20 @@ namespace LCode.RegistroEventos.WebHook.Controllers
                     var IP=Request.HttpContext.Connection.RemoteIpAddress;
                     if (IP!=null)
                     {
-                        value.IPOrigen = IP.ToString();
+                        value.ListaOrigen.First().IPOrigen = IP.ToString();
                     }
                     string ServidorMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Servidor");
                     string MQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Cola");
                     Uri uri = new Uri("rabbitmq://" + ServidorMQ + "/" + MQ + "");
                     var endPoint = await _bus.GetSendEndpoint(uri);
-                    await endPoint.Send<NuevoEvento>(value);
+                    await endPoint.Send<AplicativoComponente>(value);
                     return Ok();
                 }
                 return BadRequest();
             }
             catch (Exception ex)
             {
-                await Evento.Registrar(NETCore.Base._5._0.Entidades.TipoEvento.Error, ex);
+                await Evento.ErrorAsync(ex);
                 return StatusCode(500);
             }
         }

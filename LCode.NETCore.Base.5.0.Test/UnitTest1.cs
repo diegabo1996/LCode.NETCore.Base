@@ -14,12 +14,12 @@ namespace LCode.NETCore.Base._5._0.Test
             string llave = Seguridad.Seguridad.T3DES.EncryptKeyTripleDes(DateTime.Now.ToString());
             try
             {
-                Evento.Registrar(Entidades.TipoEvento.Error,"ERROR!");
+                Evento.ErrorAsync(Entidades.TipoEvento.Error,"ERROR!");
                 BaseConfiguracion.ObtenerValor("AAAA");
             }
             catch(Exception Ex)
             {
-                Evento.Registrar(Entidades.TipoEvento.Error, Ex);
+                Evento.ErrorAsync(Entidades.TipoEvento.Error, Ex);
             }
         }
     }

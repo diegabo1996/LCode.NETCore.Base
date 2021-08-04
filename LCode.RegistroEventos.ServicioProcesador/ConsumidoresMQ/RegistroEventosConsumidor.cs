@@ -1,16 +1,16 @@
-﻿using LCode.NETCore.Base._5._0.Logs;
+﻿using LCode.NETCore.Base._5._0.Entidades;
+using LCode.NETCore.Base._5._0.Logs;
 using LCode.RegistroEventos.BD;
-using LCode.RegistroEventos.BD.Modelos;
 using MassTransit;
 using System;
 using System.Threading.Tasks;
 
 namespace LCode.RegistroEventos.ServicioProcesador.ConsumidoresMQ
 {
-    public class RegistroEventosConsumidor: IConsumer<NuevoEvento>
+    public class RegistroEventosConsumidor: IConsumer<AplicativoComponente>
     {
         private readonly Contexto _context = new Contexto();
-        public async Task Consume(ConsumeContext<NuevoEvento> context)
+        public async Task Consume(ConsumeContext<AplicativoComponente> context)
         {
             try
             {
