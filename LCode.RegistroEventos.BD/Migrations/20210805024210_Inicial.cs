@@ -33,24 +33,23 @@ namespace LCode.RegistroEventos.BD.Migrations
                 {
                     IdEventoOrigen = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdAplicativoComponente = table.Column<int>(type: "int", nullable: false),
                     IPOrigen = table.Column<string>(type: "varchar(25)", nullable: true),
                     NombreHost = table.Column<string>(type: "varchar(25)", nullable: true),
                     Version = table.Column<string>(type: "varchar(20)", nullable: false),
                     EsDocker = table.Column<bool>(type: "bit", nullable: false),
-                    IdActividad = table.Column<string>(type: "varchar(150)", nullable: true),
-                    FechaHoraRegistro = table.Column<DateTime>(type: "datetime", nullable: false),
-                    AplicativoComponenteIdAplicativoComponente = table.Column<int>(type: "int", nullable: true)
+                    FechaHoraRegistro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EventosOrigenes", x => x.IdEventoOrigen);
                     table.ForeignKey(
-                        name: "FK_EventosOrigenes_AplicacionesComponentes_AplicativoComponenteIdAplicativoComponente",
-                        column: x => x.AplicativoComponenteIdAplicativoComponente,
+                        name: "FK_EventosOrigenes_AplicacionesComponentes_IdAplicativoComponente",
+                        column: x => x.IdAplicativoComponente,
                         principalSchema: "lcode",
                         principalTable: "AplicacionesComponentes",
                         principalColumn: "IdAplicativoComponente",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -60,23 +59,24 @@ namespace LCode.RegistroEventos.BD.Migrations
                 {
                     IdEvento = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdEventoOrigen = table.Column<int>(type: "int", nullable: false),
                     TipoEvento = table.Column<int>(type: "int", nullable: false),
                     Mensaje = table.Column<string>(type: "text", nullable: false),
                     MensajeDetallado = table.Column<string>(type: "text", nullable: true),
                     MensajeAdicional = table.Column<string>(type: "text", nullable: true),
-                    FechaHoraEvento = table.Column<DateTime>(type: "datetime", nullable: false),
-                    EventoOrigenIdEventoOrigen = table.Column<int>(type: "int", nullable: true)
+                    IdActividad = table.Column<string>(type: "varchar(150)", nullable: true),
+                    FechaHoraEvento = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Eventos", x => x.IdEvento);
                     table.ForeignKey(
-                        name: "FK_Eventos_EventosOrigenes_EventoOrigenIdEventoOrigen",
-                        column: x => x.EventoOrigenIdEventoOrigen,
+                        name: "FK_Eventos_EventosOrigenes_IdEventoOrigen",
+                        column: x => x.IdEventoOrigen,
                         principalSchema: "lcode",
                         principalTable: "EventosOrigenes",
                         principalColumn: "IdEventoOrigen",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -86,42 +86,44 @@ namespace LCode.RegistroEventos.BD.Migrations
                 {
                     IdRastro = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    IdEvento = table.Column<int>(type: "int", nullable: false),
+                    NombreDll = table.Column<string>(type: "varchar(150)", nullable: false),
+                    NombreArchivo = table.Column<string>(type: "varchar(150)", nullable: false),
                     NombreClase = table.Column<string>(type: "varchar(50)", nullable: false),
                     NombreMetodo = table.Column<string>(type: "varchar(50)", nullable: false),
                     NumeroLinea = table.Column<int>(type: "int", nullable: false),
                     NumeroColumna = table.Column<int>(type: "int", nullable: false),
-                    FechaHoraRastro = table.Column<DateTime>(type: "datetime", nullable: false),
-                    EventoEntidadIdEvento = table.Column<int>(type: "int", nullable: true)
+                    FechaHoraRastro = table.Column<DateTime>(type: "datetime", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_RastrosEventos", x => x.IdRastro);
                     table.ForeignKey(
-                        name: "FK_RastrosEventos_Eventos_EventoEntidadIdEvento",
-                        column: x => x.EventoEntidadIdEvento,
+                        name: "FK_RastrosEventos_Eventos_IdEvento",
+                        column: x => x.IdEvento,
                         principalSchema: "lcode",
                         principalTable: "Eventos",
                         principalColumn: "IdEvento",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Eventos_EventoOrigenIdEventoOrigen",
+                name: "IX_Eventos_IdEventoOrigen",
                 schema: "lcode",
                 table: "Eventos",
-                column: "EventoOrigenIdEventoOrigen");
+                column: "IdEventoOrigen");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EventosOrigenes_AplicativoComponenteIdAplicativoComponente",
+                name: "IX_EventosOrigenes_IdAplicativoComponente",
                 schema: "lcode",
                 table: "EventosOrigenes",
-                column: "AplicativoComponenteIdAplicativoComponente");
+                column: "IdAplicativoComponente");
 
             migrationBuilder.CreateIndex(
-                name: "IX_RastrosEventos_EventoEntidadIdEvento",
+                name: "IX_RastrosEventos_IdEvento",
                 schema: "lcode",
                 table: "RastrosEventos",
-                column: "EventoEntidadIdEvento");
+                column: "IdEvento");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

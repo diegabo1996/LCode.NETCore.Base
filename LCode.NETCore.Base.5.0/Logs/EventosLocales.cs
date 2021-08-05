@@ -57,7 +57,7 @@ Environment.NewLine + @"Mensaje: " + Evento.InterpretaObjetos(Excepcion_Mensaje)
             var TipoEvento = eventoEntidad.ListaOrigen.First().ListaEventos.First().TipoEvento;
             Mensaje += nameof(TipoEvento).ToString() + "::: Datos - Nombre Proyecto: " + eventoEntidad.NombreComponente +
             Environment.NewLine + "Version: " + eventoEntidad.ListaOrigen.First().Version +
-            Environment.NewLine + "Id Seguimiento: " + eventoEntidad.ListaOrigen.First().IdActividad +
+            Environment.NewLine + "Id Seguimiento: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().IdActividad +
             Environment.NewLine + "Nombre Archivo: " + eventoEntidad.NombreComponenteCompleto +
             Environment.NewLine + "Nombre de Clase: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().ListaRastros.First().NombreClase +
             Environment.NewLine + "Nombre Metodo: " + eventoEntidad.ListaOrigen.First().ListaEventos.First().ListaRastros.First().NombreMetodo +

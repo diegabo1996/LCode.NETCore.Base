@@ -14,7 +14,7 @@ namespace LCode.RegistroEventos.WebHook
     {
         public static void Main(string[] args)
         {
-            MiddlewareExcepciones.IniciarCapturaExcepciones();
+            //MiddlewareExcepciones.IniciarCapturaExcepciones();
             CreateHostBuilder(args).Build().Run();
         }
 

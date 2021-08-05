@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LCode.RegistroEventos.BD.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210804154404_Inicial")]
+    [Migration("20210805024210_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,16 +18,16 @@ namespace LCode.RegistroEventos.BD.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("lcode")
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7");
+                .HasAnnotation("ProductVersion", "5.0.7")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("LCode.NETCore.Base._5._0.Entidades.AplicativoComponente", b =>
                 {
                     b.Property<int>("IdAplicativoComponente")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("FechaHoraRegistro")
                         .HasColumnType("datetime");
@@ -50,13 +50,16 @@ namespace LCode.RegistroEventos.BD.Migrations
                     b.Property<int>("IdEvento")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("EventoOrigenIdEventoOrigen")
-                        .HasColumnType("int");
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("FechaHoraEvento")
                         .HasColumnType("datetime");
+
+                    b.Property<string>("IdActividad")
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<int>("IdEventoOrigen")
+                        .HasColumnType("int");
 
                     b.Property<string>("Mensaje")
                         .IsRequired()
@@ -73,7 +76,7 @@ namespace LCode.RegistroEventos.BD.Migrations
 
                     b.HasKey("IdEvento");
 
-                    b.HasIndex("EventoOrigenIdEventoOrigen");
+                    b.HasIndex("IdEventoOrigen");
 
                     b.ToTable("Eventos");
                 });
@@ -83,10 +86,7 @@ namespace LCode.RegistroEventos.BD.Migrations
                     b.Property<int>("IdEventoOrigen")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("AplicativoComponenteIdAplicativoComponente")
-                        .HasColumnType("int");
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool>("EsDocker")
                         .HasColumnType("bit");
@@ -97,8 +97,8 @@ namespace LCode.RegistroEventos.BD.Migrations
                     b.Property<string>("IPOrigen")
                         .HasColumnType("varchar(25)");
 
-                    b.Property<string>("IdActividad")
-                        .HasColumnType("varchar(150)");
+                    b.Property<int>("IdAplicativoComponente")
+                        .HasColumnType("int");
 
                     b.Property<string>("NombreHost")
                         .HasColumnType("varchar(25)");
@@ -109,7 +109,7 @@ namespace LCode.RegistroEventos.BD.Migrations
 
                     b.HasKey("IdEventoOrigen");
 
-                    b.HasIndex("AplicativoComponenteIdAplicativoComponente");
+                    b.HasIndex("IdAplicativoComponente");
 
                     b.ToTable("EventosOrigenes");
                 });
@@ -119,17 +119,25 @@ namespace LCode.RegistroEventos.BD.Migrations
                     b.Property<int>("IdRastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int?>("EventoEntidadIdEvento")
-                        .HasColumnType("int");
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("FechaHoraRastro")
                         .HasColumnType("datetime");
 
+                    b.Property<int>("IdEvento")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NombreArchivo")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
+
                     b.Property<string>("NombreClase")
                         .IsRequired()
                         .HasColumnType("varchar(50)");
+
+                    b.Property<string>("NombreDll")
+                        .IsRequired()
+                        .HasColumnType("varchar(150)");
 
                     b.Property<string>("NombreMetodo")
                         .IsRequired()
@@ -143,30 +151,42 @@ namespace LCode.RegistroEventos.BD.Migrations
 
                     b.HasKey("IdRastro");
 
-                    b.HasIndex("EventoEntidadIdEvento");
+                    b.HasIndex("IdEvento");
 
                     b.ToTable("RastrosEventos");
                 });
 
             modelBuilder.Entity("LCode.NETCore.Base._5._0.Entidades.EventoEntidad", b =>
                 {
-                    b.HasOne("LCode.NETCore.Base._5._0.Entidades.EventoOrigen", null)
+                    b.HasOne("LCode.NETCore.Base._5._0.Entidades.EventoOrigen", "EventoOrigen")
                         .WithMany("ListaEventos")
-                        .HasForeignKey("EventoOrigenIdEventoOrigen");
+                        .HasForeignKey("IdEventoOrigen")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EventoOrigen");
                 });
 
             modelBuilder.Entity("LCode.NETCore.Base._5._0.Entidades.EventoOrigen", b =>
                 {
-                    b.HasOne("LCode.NETCore.Base._5._0.Entidades.AplicativoComponente", null)
+                    b.HasOne("LCode.NETCore.Base._5._0.Entidades.AplicativoComponente", "AplicativoComponente")
                         .WithMany("ListaOrigen")
-                        .HasForeignKey("AplicativoComponenteIdAplicativoComponente");
+                        .HasForeignKey("IdAplicativoComponente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AplicativoComponente");
                 });
 
             modelBuilder.Entity("LCode.NETCore.Base._5._0.Entidades.RastroEntidad", b =>
                 {
-                    b.HasOne("LCode.NETCore.Base._5._0.Entidades.EventoEntidad", null)
+                    b.HasOne("LCode.NETCore.Base._5._0.Entidades.EventoEntidad", "EventoEntidad")
                         .WithMany("ListaRastros")
-                        .HasForeignKey("EventoEntidadIdEvento");
+                        .HasForeignKey("IdEvento")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EventoEntidad");
                 });
 
             modelBuilder.Entity("LCode.NETCore.Base._5._0.Entidades.AplicativoComponente", b =>

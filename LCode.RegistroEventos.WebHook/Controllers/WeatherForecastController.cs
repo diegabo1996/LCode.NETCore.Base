@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using LCode.NETCore.Base._5._0.Logs;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -24,8 +25,9 @@ namespace LCode.RegistroEventos.WebHook.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> GetAsync()
         {
+            try { 
             var rng = new Random();
             throw new Exception("Excepcion!");
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
@@ -35,6 +37,12 @@ namespace LCode.RegistroEventos.WebHook.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
+            }
+            catch (Exception Ex)
+            {
+                await Evento.ErrorAsync(Ex);
+                return null;
+            }
         }
     }
 }

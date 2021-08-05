@@ -74,10 +74,6 @@ namespace LCode.NETCore.Base._5._0.Logs
             #region EventoOrigen
             EventoOrigen eventoOrigen = new EventoOrigen();
             eventoOrigen.EsDocker = DatosServicio.EsDocker;
-            if (Activity.Current != null)
-            {
-                eventoOrigen.IdActividad = Activity.Current.RootId + "||" + Activity.Current.Id;
-            }
             eventoOrigen.Version = DatosServicio.Version;
             eventoOrigen.NombreHost = Environment.MachineName;
             eventoOrigen.ListaEventos = new List<EventoEntidad>();
@@ -98,6 +94,10 @@ namespace LCode.NETCore.Base._5._0.Logs
                 st = new StackTrace(1, true);
                 eventoEntidad.Mensaje = InterpretaObjetos(Excepcion_Mensaje);
             }
+            if (Activity.Current != null)
+            {
+                eventoEntidad.IdActividad = Activity.Current?.RootId;
+            }
             eventoEntidad.MensajeAdicional = InterpretaObjetos(NotaMensajeExtra);
             eventoEntidad.TipoEvento = TipoEvento;
             eventoEntidad.ListaRastros = new List<RastroEntidad>();
@@ -108,8 +108,10 @@ namespace LCode.NETCore.Base._5._0.Logs
                 if (ttt != 0)
                 {
                     RastroEntidad rastroEntidad = new RastroEntidad();
-                    rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.Name;
-                    rastroEntidad.NombreMetodo = sf.GetMethod().Name;
+                    rastroEntidad.NombreDll = sf.GetMethod().DeclaringType.Assembly.ManifestModule.Name;
+                    rastroEntidad.NombreArchivo = sf.GetFileName();
+                    rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.FullName;
+                    rastroEntidad.NombreMetodo = sf.GetMethod().Name=="MoveNext"? sf.GetMethod().DeclaringType.Name : sf.GetMethod().Name;
                     rastroEntidad.NumeroLinea = ttt;
                     rastroEntidad.NumeroColumna = sf.GetFileColumnNumber();
                     eventoEntidad.ListaRastros.Add(rastroEntidad);
@@ -131,10 +133,6 @@ namespace LCode.NETCore.Base._5._0.Logs
             #region EventoOrigen
             EventoOrigen eventoOrigen = new EventoOrigen();
             eventoOrigen.EsDocker = DatosServicio.EsDocker;
-            if (Activity.Current != null)
-            {
-                eventoOrigen.IdActividad = Activity.Current.RootId + "||" + Activity.Current.Id;
-            }
             eventoOrigen.Version = DatosServicio.Version;
             eventoOrigen.NombreHost = Environment.MachineName;
             eventoOrigen.ListaEventos = new List<EventoEntidad>();
@@ -155,6 +153,10 @@ namespace LCode.NETCore.Base._5._0.Logs
                 st = new StackTrace(1, true);
                 eventoEntidad.Mensaje = InterpretaObjetos(Excepcion_Mensaje);
             }
+            if (Activity.Current != null)
+            {
+                eventoEntidad.IdActividad = Activity.Current?.RootId;
+            }
             eventoEntidad.MensajeAdicional = InterpretaObjetos(NotaMensajeExtra);
             eventoEntidad.TipoEvento = TipoEvento;
             eventoEntidad.ListaRastros = new List<RastroEntidad>();
@@ -165,8 +167,10 @@ namespace LCode.NETCore.Base._5._0.Logs
                 if (ttt != 0)
                 {
                     RastroEntidad rastroEntidad = new RastroEntidad();
-                    rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.Name;
-                    rastroEntidad.NombreMetodo = sf.GetMethod().Name;
+                    rastroEntidad.NombreDll = sf.GetMethod().DeclaringType.Assembly.ManifestModule.Name;
+                    rastroEntidad.NombreArchivo = sf.GetFileName();
+                    rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.FullName;
+                    rastroEntidad.NombreMetodo = sf.GetMethod().DeclaringType.Name;
                     rastroEntidad.NumeroLinea = ttt;
                     rastroEntidad.NumeroColumna = sf.GetFileColumnNumber();
                     eventoEntidad.ListaRastros.Add(rastroEntidad);

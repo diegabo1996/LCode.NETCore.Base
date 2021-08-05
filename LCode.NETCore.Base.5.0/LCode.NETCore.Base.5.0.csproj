@@ -14,7 +14,7 @@
     <PackageId>LCode.NETCore.Base</PackageId>
     <Copyright>LCode © 2021</Copyright>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>1.0.4</Version>
+    <Version>1.0.8</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

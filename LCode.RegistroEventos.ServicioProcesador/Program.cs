@@ -17,7 +17,7 @@ namespace LCode.RegistroEventos.ServicioProcesador
     {
         public static void Main(string[] args)
         {
-            MiddlewareExcepciones.IniciarCapturaExcepciones();
+            //MiddlewareExcepciones.IniciarCapturaExcepciones();
             CreateHostBuilder(args).Build().Run();
         }
 
@@ -26,7 +26,7 @@ namespace LCode.RegistroEventos.ServicioProcesador
             .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<Worker>();
+                    //services.AddHostedService<Worker>();
                     string ServidorMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Servidor");
                     string MQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Cola");
                     string UsuarioMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Usuario");
