@@ -24,8 +24,6 @@ namespace LCode.RegistroEventos.WebHook.Controllers
         [HttpPost]
         public async Task<IActionResult> PostAsync([FromBody] AplicativoComponente value)
         {
-            try
-            {
                 if (value != null)
                 {
                     var IP=Request.HttpContext.Connection.RemoteIpAddress;
@@ -35,18 +33,12 @@ namespace LCode.RegistroEventos.WebHook.Controllers
                     }
                     string ServidorMQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Servidor");
                     string MQ = BaseConfiguracion.ObtenerValor("ConfigMQ:RabbitMQ:Cola");
-                    Uri uri = new Uri("rabbitmq://" + ServidorMQ + "/" + MQ + "");
+                    Uri uri = new Uri("r://" + ServidorMQ + "/" + MQ + "");
                     var endPoint = await _bus.GetSendEndpoint(uri);
                     await endPoint.Send<AplicativoComponente>(value);
                     return Ok();
                 }
                 return BadRequest();
-            }
-            catch (Exception ex)
-            {
-                await Evento.ErrorAsync(ex);
-                return StatusCode(500);
-            }
         }
     }
 }

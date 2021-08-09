@@ -1,4 +1,5 @@
 using LCode.NETCore.Base._5._0.Configuracion;
+using LCode.NETCore.Base._5._0.Excepciones;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,7 @@ namespace LCode.RegistroEventos.WebHook
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LCode.RegistroEventos.WebHook v1"));
+            app.UsarApiCapturadorErrores();
             app.Use(async (context, next) =>
             {
                 //string LlaveServicio = context.Request.Headers.FirstOrDefault(x => x.Key == "LlaveServicio").Value.FirstOrDefault();

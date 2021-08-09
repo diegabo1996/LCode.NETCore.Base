@@ -27,9 +27,9 @@ namespace LCode.RegistroEventos.WebHook.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> GetAsync()
         {
-            try { 
             var rng = new Random();
-            throw new Exception("Excepcion!");
+            string [] AS= new string[1];
+            string a = AS[2];
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateTime.Now.AddDays(index),
@@ -37,12 +37,6 @@ namespace LCode.RegistroEventos.WebHook.Controllers
                 Summary = Summaries[rng.Next(Summaries.Length)]
             })
             .ToArray();
-            }
-            catch (Exception Ex)
-            {
-                await Evento.ErrorAsync(Ex);
-                return null;
-            }
         }
     }
 }
