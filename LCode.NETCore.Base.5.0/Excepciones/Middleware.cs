@@ -56,7 +56,6 @@ namespace LCode.NETCore.Base._5._0.Excepciones
 
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-                await context.Response.WriteAsync(message);
             }
 
             private static string calculateErrorCode(string traceIdentifier)
