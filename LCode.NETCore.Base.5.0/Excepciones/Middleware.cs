@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using static LCode.NETCore.Base._5._0.Excepciones.MiddlewareExcepciones;
 using System.ComponentModel;
+using LCode.NETCore.Base._5._0.Configuracion;
 
 namespace LCode.NETCore.Base._5._0.Excepciones
 {
@@ -50,12 +51,17 @@ namespace LCode.NETCore.Base._5._0.Excepciones
                 }
                 //string Excepcion = exception.GetType().ToString();
                 string errorCode = calculateErrorCode(context.TraceIdentifier);
-                string message = string.Format("Ha ocurrido un error no controlado: '{0}'  [{1}]  "+ code + "", errorCode, context.TraceIdentifier);
+                string message = string.Format("Ha ocurrido un error no controlado: '{0}'  [{1}]  " + code + "", errorCode, context.TraceIdentifier);
 
                 await Evento.ErrorNoControladoAsync(exception, message);
 
                 context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
+                string PaginaErrorDefecto = BaseConfiguracion.ObtenerValorBase("Logs:PaginaErrorDefecto");
+                if (PaginaErrorDefecto != null)
+                {
+                    context.Response.Redirect(PaginaErrorDefecto);
+                }
             }
 
             private static string calculateErrorCode(string traceIdentifier)
