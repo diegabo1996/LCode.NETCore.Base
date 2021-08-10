@@ -27,8 +27,11 @@ namespace LCode.RegistroEventos.WebHook.Controllers
         [HttpGet]
         public async Task<IEnumerable<WeatherForecast>> GetAsync()
         {
+            await Evento.InformativoAsync("Inicio de proceso!");
             var rng = new Random();
+            await Evento.AdvertenciaAsync("Adevertencia de Proceso!");
             string [] AS= new string[1];
+            await Evento.DepuracionAsync("TODA LA INFO EN DEBUG!");
             string a = AS[2];
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

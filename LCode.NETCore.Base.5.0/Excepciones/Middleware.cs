@@ -48,7 +48,7 @@ namespace LCode.NETCore.Base._5._0.Excepciones
                     code = w32ex.ErrorCode;
                     // do stuff
                 }
-                string Excepcion = exception.GetType().ToString();
+                //string Excepcion = exception.GetType().ToString();
                 string errorCode = calculateErrorCode(context.TraceIdentifier);
                 string message = string.Format("Ha ocurrido un error no controlado: '{0}'  [{1}]  "+ code + "", errorCode, context.TraceIdentifier);
 

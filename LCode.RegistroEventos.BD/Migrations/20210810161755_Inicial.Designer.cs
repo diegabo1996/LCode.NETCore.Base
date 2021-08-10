@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LCode.RegistroEventos.BD.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20210805024210_Inicial")]
+    [Migration("20210810161755_Inicial")]
     partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,16 +18,16 @@ namespace LCode.RegistroEventos.BD.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasDefaultSchema("lcode")
+                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.7")
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("ProductVersion", "5.0.7");
 
             modelBuilder.Entity("LCode.NETCore.Base._5._0.Entidades.AplicativoComponente", b =>
                 {
                     b.Property<int>("IdAplicativoComponente")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("FechaHoraRegistro")
                         .HasColumnType("datetime");
@@ -50,7 +50,10 @@ namespace LCode.RegistroEventos.BD.Migrations
                     b.Property<int>("IdEvento")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
+
+                    b.Property<int>("CodigoExcepcion")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("FechaHoraEvento")
                         .HasColumnType("datetime");
@@ -74,6 +77,9 @@ namespace LCode.RegistroEventos.BD.Migrations
                     b.Property<int>("TipoEvento")
                         .HasColumnType("int");
 
+                    b.Property<string>("TipoExcepcion")
+                        .HasColumnType("varchar(100)");
+
                     b.HasKey("IdEvento");
 
                     b.HasIndex("IdEventoOrigen");
@@ -86,7 +92,7 @@ namespace LCode.RegistroEventos.BD.Migrations
                     b.Property<int>("IdEventoOrigen")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<bool>("EsDocker")
                         .HasColumnType("bit");
@@ -119,7 +125,7 @@ namespace LCode.RegistroEventos.BD.Migrations
                     b.Property<int>("IdRastro")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .UseIdentityColumn();
 
                     b.Property<DateTime>("FechaHoraRastro")
                         .HasColumnType("datetime");
@@ -129,15 +135,15 @@ namespace LCode.RegistroEventos.BD.Migrations
 
                     b.Property<string>("NombreArchivo")
                         .IsRequired()
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("NombreClase")
                         .IsRequired()
-                        .HasColumnType("varchar(50)");
+                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("NombreDll")
                         .IsRequired()
-                        .HasColumnType("varchar(150)");
+                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("NombreMetodo")
                         .IsRequired()

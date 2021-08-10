@@ -71,6 +71,11 @@ namespace LCode.NETCore.Base._5._0.Entidades
         [Required]
         [DisplayName("Tipo de Evento")]
         public TipoEvento TipoEvento { get; set; }
+        [Column(TypeName = "varchar(100)")]
+        [DisplayName("Tipo Excepcion")]
+        public string? TipoExcepcion { get; set; }
+        [DisplayName("Codigo de Excepcion")]
+        public int CodigoExcepcion { get; set; }
         [Required]
         [Column(TypeName = "text")]
         public string Mensaje { get; set; }

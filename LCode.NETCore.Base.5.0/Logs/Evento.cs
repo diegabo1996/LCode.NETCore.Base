@@ -10,13 +10,14 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel;
 
 namespace LCode.NETCore.Base._5._0.Logs
 {
     public class Evento
     {
         #region MetodosRegistroEventos
-        public static async Task ErrorAsync (object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
+        public static async Task ErrorAsync(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
             await RegistrarAsync(Entidades.TipoEvento.Error, Excepcion_Mensaje, NotaMensajeExtra);
         }
@@ -34,9 +35,9 @@ namespace LCode.NETCore.Base._5._0.Logs
             if (NivelLogs() == 1 || NivelLogs() == 2 || NivelLogs() == 3)
                 Task.Run(async () => await RegistrarAsync(Entidades.TipoEvento.Informativo, Excepcion_Mensaje, NotaMensajeExtra));
         }
-        public static async Task AdvertenciaAsync (object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
+        public static async Task AdvertenciaAsync(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
         {
-            if (NivelLogs() == 1|| NivelLogs() == 2)
+            if (NivelLogs() == 1 || NivelLogs() == 2)
                 await RegistrarAsync(Entidades.TipoEvento.Advertencia, Excepcion_Mensaje, NotaMensajeExtra);
         }
         public static void Advertencia(object Excepcion_Mensaje = null, object NotaMensajeExtra = null)
@@ -84,10 +85,24 @@ namespace LCode.NETCore.Base._5._0.Logs
             if (Excepcion_Mensaje.GetType().Name.ToUpper().Contains("EXCEPTION"))
             {
                 Excepcion = ((Exception)Excepcion_Mensaje);
+
+                var w32ex = Excepcion as Win32Exception;
+                if (w32ex == null)
+                {
+                    w32ex = Excepcion.InnerException as Win32Exception;
+                }
+                int code = 0;
+                if (w32ex != null)
+                {
+                    code = w32ex.ErrorCode;
+                }
+                string ExcepcionKnd = Excepcion.GetType().ToString();
                 st = new StackTrace(((Exception)Excepcion), true);
                 Excepcion_Mensaje = null;
                 eventoEntidad.Mensaje = Excepcion.Message;
                 eventoEntidad.MensajeDetallado = Excepcion.ToString();
+                eventoEntidad.CodigoExcepcion = code;
+                eventoEntidad.TipoExcepcion = ExcepcionKnd;
             }
             else
             {
@@ -100,21 +115,24 @@ namespace LCode.NETCore.Base._5._0.Logs
             }
             eventoEntidad.MensajeAdicional = InterpretaObjetos(NotaMensajeExtra);
             eventoEntidad.TipoEvento = TipoEvento;
-            eventoEntidad.ListaRastros = new List<RastroEntidad>();
-            #region Rastros
-            foreach (StackFrame sf in st.GetFrames())
+            if (st != null)
             {
-                var ttt = sf.GetFileLineNumber();
-                if (ttt != 0)
+                eventoEntidad.ListaRastros = new List<RastroEntidad>();
+                #region Rastros
+                foreach (StackFrame sf in st.GetFrames())
                 {
-                    RastroEntidad rastroEntidad = new RastroEntidad();
-                    rastroEntidad.NombreDll = sf.GetMethod().DeclaringType.Assembly.ManifestModule.Name;
-                    rastroEntidad.NombreArchivo = sf.GetFileName();
-                    rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.FullName;
-                    rastroEntidad.NombreMetodo = sf.GetMethod().Name=="MoveNext"? sf.GetMethod().DeclaringType.Name : sf.GetMethod().Name;
-                    rastroEntidad.NumeroLinea = ttt;
-                    rastroEntidad.NumeroColumna = sf.GetFileColumnNumber();
-                    eventoEntidad.ListaRastros.Add(rastroEntidad);
+                    var ttt = sf.GetFileLineNumber();
+                    if (ttt != 0)
+                    {
+                        RastroEntidad rastroEntidad = new RastroEntidad();
+                        rastroEntidad.NombreDll = sf.GetMethod().DeclaringType.Assembly.ManifestModule.Name;
+                        rastroEntidad.NombreArchivo = sf.GetFileName();
+                        rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.FullName;
+                        rastroEntidad.NombreMetodo = sf.GetMethod().DeclaringType.Name;
+                        rastroEntidad.NumeroLinea = ttt;
+                        rastroEntidad.NumeroColumna = sf.GetFileColumnNumber();
+                        eventoEntidad.ListaRastros.Add(rastroEntidad);
+                    }
                 }
             }
             #endregion Rastros
@@ -143,10 +161,24 @@ namespace LCode.NETCore.Base._5._0.Logs
             if (Excepcion_Mensaje.GetType().Name.ToUpper().Contains("EXCEPTION"))
             {
                 Excepcion = ((Exception)Excepcion_Mensaje);
+
+                var w32ex = Excepcion as Win32Exception;
+                if (w32ex == null)
+                {
+                    w32ex = Excepcion.InnerException as Win32Exception;
+                }
+                int code = 0;
+                if (w32ex != null)
+                {
+                    code = w32ex.ErrorCode;
+                }
+                string ExcepcionKnd = Excepcion.GetType().ToString();
                 st = new StackTrace(((Exception)Excepcion), true);
                 Excepcion_Mensaje = null;
                 eventoEntidad.Mensaje = Excepcion.Message;
                 eventoEntidad.MensajeDetallado = Excepcion.ToString();
+                eventoEntidad.CodigoExcepcion = code;
+                eventoEntidad.TipoExcepcion = ExcepcionKnd;
             }
             else
             {
@@ -159,21 +191,24 @@ namespace LCode.NETCore.Base._5._0.Logs
             }
             eventoEntidad.MensajeAdicional = InterpretaObjetos(NotaMensajeExtra);
             eventoEntidad.TipoEvento = TipoEvento;
-            eventoEntidad.ListaRastros = new List<RastroEntidad>();
-            #region Rastros
-            foreach (StackFrame sf in st.GetFrames())
+            if (st != null)
             {
-                var ttt = sf.GetFileLineNumber();
-                if (ttt != 0)
+                eventoEntidad.ListaRastros = new List<RastroEntidad>();
+                #region Rastros
+                foreach (StackFrame sf in st.GetFrames())
                 {
-                    RastroEntidad rastroEntidad = new RastroEntidad();
-                    rastroEntidad.NombreDll = sf.GetMethod().DeclaringType.Assembly.ManifestModule.Name;
-                    rastroEntidad.NombreArchivo = sf.GetFileName();
-                    rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.FullName;
-                    rastroEntidad.NombreMetodo = sf.GetMethod().DeclaringType.Name;
-                    rastroEntidad.NumeroLinea = ttt;
-                    rastroEntidad.NumeroColumna = sf.GetFileColumnNumber();
-                    eventoEntidad.ListaRastros.Add(rastroEntidad);
+                    var ttt = sf.GetFileLineNumber();
+                    if (ttt != 0)
+                    {
+                        RastroEntidad rastroEntidad = new RastroEntidad();
+                        rastroEntidad.NombreDll = sf.GetMethod().DeclaringType.Assembly.ManifestModule.Name;
+                        rastroEntidad.NombreArchivo = sf.GetFileName();
+                        rastroEntidad.NombreClase = sf.GetMethod().DeclaringType.FullName;
+                        rastroEntidad.NombreMetodo = sf.GetMethod().DeclaringType.Name;
+                        rastroEntidad.NumeroLinea = ttt;
+                        rastroEntidad.NumeroColumna = sf.GetFileColumnNumber();
+                        eventoEntidad.ListaRastros.Add(rastroEntidad);
+                    }
                 }
             }
             #endregion Rastros

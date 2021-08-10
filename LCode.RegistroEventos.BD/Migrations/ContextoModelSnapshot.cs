@@ -50,6 +50,9 @@ namespace LCode.RegistroEventos.BD.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("CodigoExcepcion")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("FechaHoraEvento")
                         .HasColumnType("datetime");
 
@@ -71,6 +74,9 @@ namespace LCode.RegistroEventos.BD.Migrations
 
                     b.Property<int>("TipoEvento")
                         .HasColumnType("int");
+
+                    b.Property<string>("TipoExcepcion")
+                        .HasColumnType("varchar(100)");
 
                     b.HasKey("IdEvento");
 

@@ -1,5 +1,6 @@
 using LCode.NETCore.Base._5._0.Configuracion;
 using LCode.NETCore.Base._5._0.Excepciones;
+using LCode.NETCore.Base._5._0.Seguridad;
 using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
 using System;
+using System.Linq;
 
 namespace LCode.RegistroEventos.WebHook
 {
@@ -47,18 +49,20 @@ namespace LCode.RegistroEventos.WebHook
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LCode.RegistroEventos.WebHook v1"));
+            app.UseDeveloperExceptionPage();
+            app.UseSwagger();
+            app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "LCode.RegistroEventos.WebHook v1"));
             app.UsarApiCapturadorErrores();
             app.Use(async (context, next) =>
             {
-                //string LlaveServicio = context.Request.Headers.FirstOrDefault(x => x.Key == "LlaveServicio").Value.FirstOrDefault();
-                //if (string.IsNullOrEmpty(Seguridad.T3DES.DecryptKeyTripleDes(LlaveServicio)))
-                //{
-                //    context.Response.StatusCode = 401;
-                //    return;
-                //}
+#if REALEASE
+                string LlaveServicio = context.Request.Headers.FirstOrDefault(x => x.Key == "LlaveServicio").Value.FirstOrDefault();
+                if (string.IsNullOrEmpty(Seguridad.T3DES.DecryptKeyTripleDes(LlaveServicio)))
+                {
+                    context.Response.StatusCode = 401;
+                    return;
+                }
+#endif
                 await next();
             });
             app.UseHttpsRedirection();
